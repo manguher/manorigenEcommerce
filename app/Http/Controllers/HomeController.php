@@ -2,28 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Interfaces\CategoryInterface;
+use App\Services\Interfaces\ProductInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
-    public function getProducts()
+    private CategoryInterface $categoryInterface;
+    private ProductInterface $productInterface;
+
+    public function __construct(CategoryInterface $categoryInterface, ProductInterface $productInterface )
     {
-        $url = config('constants.apiUrl');
-        $respuesta = Http::get($url);
-        $dolar = $respuesta -> json();
-        return view('pages.home', compact('dolar'));
+        $this->categoryInterface = $categoryInterface;
+        $this->productInterface = $productInterface;
     }
 
-    public function getCategoryProduct()
+    public function index()
     {
-        
-        $url = config('constants.apiUrl' )  . 'categories?ws_key=' . config('constants.apiKey' ) . '&display=full&output_format=JSON';
-        $response = Http::get($url);
-        $res = $response -> json();
-        $category = collect($res['categories'])->filter(function ($value) {
-            return $value['id_parent'] == '2';
-        });
-        return view('pages.home', compact('category'));
+        $category = $this->categoryInterface->getAllCategories(); 
+        $product = $this->productInterface->getAllProducts();
+        $viewShareVars = array_keys(get_defined_vars());
+
+        return view('pages.home', compact($viewShareVars));
+    }
+
+    public function getAllProductsByCategoryId($categoryId)
+    {  
+        $productsByCategory = $this->productInterface->getProductsByCategoryId($categoryId);
+        return $productsByCategory;
     }
 }

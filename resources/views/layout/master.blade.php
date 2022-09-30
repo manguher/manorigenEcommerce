@@ -17,6 +17,7 @@
 </body>
 
 <script src="{{ asset('js/main.js') }}"></script>
+<script src="{{ asset('js/home.js') }}"></script>
 <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('vendor/aos/aos.js') }}"></script>
 <script src="{{ asset('vendor/glightbox/js/glightbox.min.js') }}"></script>
