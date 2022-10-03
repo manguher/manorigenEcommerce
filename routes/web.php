@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/{id}', [HomeController::class, 'getAllProductsByCategoryId']);
+Route::get('/detalle-producto/{id}', [HomeController::class, 'getAllProductsByCategoryId']);
 

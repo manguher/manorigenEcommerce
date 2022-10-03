@@ -46,24 +46,21 @@ class ProductsRepo implements ProductInterface
 
         //filter category 
         foreach ($category as $value) {
-            if ($value['id'] == $categoryId) 
-            {
+            if ($value['id'] == $categoryId) {
                 $associations = $value['associations'];
                 $productsIds = $associations['products'];
-                foreach($productsIds as $key => $productObject)
-                {
+                foreach ($productsIds as $key => $productObject) {
                     $productsIds[$key]['id_parent_category'] = $value['id'];
-                }     
+                }
             }
         }
 
         //filter products 
-        foreach ($productsIds as $item) 
-        {
-            foreach ($allProducts['products'] as $key => $value) 
-            {
+        foreach ($productsIds as $item) {
+            foreach ($allProducts['products'] as $key => $value) {
                 if ($item['id'] == $value['id']) {
                     $allProducts['products'][$key]['id_parent_cat'] = $item['id_parent_category'];
+                    $allProducts['products'][$key]['url_image_default'] =  $this->url . 'images/products/' . $item['id'] . '/' . $value['id_default_image'] . '?ws_key=' . config('constants.apiKey');
                     array_push($productsLst, $allProducts['products'][$key]);
                 }
             }
