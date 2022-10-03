@@ -30,6 +30,9 @@ class HomeController extends Controller
     public function getAllProductsByCategoryId($categoryId)
     {  
         $productsByCategory = $this->productInterface->getProductsByCategoryId($categoryId);
-        return $productsByCategory;
+        $html = view('pages.home-product')
+                ->with('productsHome', $productsByCategory)
+                ->render();
+        return response()->json($html);
     }
 }

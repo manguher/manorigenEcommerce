@@ -6,4 +6,5 @@ interface ProductInterface
 {
     public function getAllProducts();
     public function getProductsByCategoryId($categoryId);
+    public function getProductsById($productId);
 }

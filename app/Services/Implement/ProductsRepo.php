@@ -67,4 +67,16 @@ class ProductsRepo implements ProductInterface
         }
         return $productsLst;
     }
+
+    public function getProductsById($productId)
+    {
+        $full_path = $this->url . 'products/' . $productId .'?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
+        $response = $this->http->get($full_path, [
+            'headers'         => $this->headers,
+            'timeout'         => 30,
+            'connect_timeout' => 30,
+            'http_errors'     => true,
+        ]);
+        return json_decode($response->getBody(), true);
+    }
 }
