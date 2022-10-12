@@ -587,7 +587,7 @@ section {
 # About Section
 --------------------------------------------------------------*/
 .about .about-img {
-  min-height: 500px;
+  min-height: 400px;
 }
 
 .about h3 {

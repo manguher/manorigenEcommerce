@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf14086919a839fe740e00554e4baff6",
+    "content-hash": "7c487da571b29f6860bbae82f2a54eb5",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -121,6 +121,69 @@
                 }
             ],
             "time": "2021-08-15T20:50:18+00:00"
+        },
+        {
+            "name": "darryldecode/cart",
+            "version": "4.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/darryldecode/laravelshoppingcart.git",
+                "reference": "bc5ff0e1c7d20d621fa63b3218532f2ae7cbf841"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/darryldecode/laravelshoppingcart/zipball/bc5ff0e1c7d20d621fa63b3218532f2ae7cbf841",
+                "reference": "bc5ff0e1c7d20d621fa63b3218532f2ae7cbf841",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/translation": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0",
+                "illuminate/validation": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "mockery/mockery": "^1.4.2",
+                "phpunit/phpunit": "^9.0",
+                "symfony/var-dumper": "5.1.5.*@dev"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Darryldecode\\Cart\\CartServiceProvider"
+                    ],
+                    "aliases": {
+                        "Cart": "Darryldecode\\Cart\\Facades\\CartFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Darryldecode\\": "src/Darryldecode"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Darryl Fernandez",
+                    "email": "engrdarrylfernandez@gmail.com"
+                }
+            ],
+            "description": "Laravel 5 Shopping cart",
+            "keywords": [
+                "cart",
+                "laravel",
+                "shopping cart"
+            ],
+            "support": {
+                "issues": "https://github.com/darryldecode/laravelshoppingcart/issues",
+                "source": "https://github.com/darryldecode/laravelshoppingcart/tree/4.2.2"
+            },
+            "time": "2022-02-11T14:04:34+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -2276,6 +2339,101 @@
                 }
             ],
             "time": "2022-07-30T15:51:26+00:00"
+        },
+        {
+            "name": "prestashop/prestashop-webservice-lib",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PrestaShop/PrestaShop-webservice-lib.git",
+                "reference": "b58cc0d3d745e6d9df2d892b81fde64872a10742"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PrestaShop/PrestaShop-webservice-lib/zipball/b58cc0d3d745e6d9df2d892b81fde64872a10742",
+                "reference": "b58cc0d3d745e6d9df2d892b81fde64872a10742",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "ext-libxml": "*",
+                "ext-simplexml": "*",
+                "php": ">= 5.3.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "PSWebServiceLibrary.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "OSL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "PrestaShop SA",
+                    "email": "contact@prestashop.com"
+                }
+            ],
+            "description": "PrestaShop Webservice access library",
+            "support": {
+                "issues": "https://github.com/PrestaShop/PrestaShop-webservice-lib/issues",
+                "source": "https://github.com/PrestaShop/PrestaShop-webservice-lib/tree/master"
+            },
+            "time": "2022-04-19T09:30:48+00:00"
+        },
+        {
+            "name": "protechstudio/laravel-prestashop-webservice",
+            "version": "3.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Silentscripter/laravel-prestashop-webservice.git",
+                "reference": "cfff73998d6e1311b57e51fe11b74bd205719879"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Silentscripter/laravel-prestashop-webservice/zipball/cfff73998d6e1311b57e51fe11b74bd205719879",
+                "reference": "cfff73998d6e1311b57e51fe11b74bd205719879",
+                "shasum": ""
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.5",
+                "squizlabs/php_codesniffer": "^3.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Protechstudio\\PrestashopWebService\\PrestashopWebServiceProvider"
+                    ],
+                    "aliases": {
+                        "Prestashop": "Protechstudio\\PrestashopWebService\\PrestashopWebServiceFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Protechstudio\\PrestashopWebService\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vito Laera",
+                    "email": "vito.laera@protechstudio.it"
+                }
+            ],
+            "description": "Laravel 5 wrapper for Prestashop Web Service Library",
+            "support": {
+                "issues": "https://github.com/Silentscripter/laravel-prestashop-webservice/issues",
+                "source": "https://github.com/Silentscripter/laravel-prestashop-webservice/tree/master"
+            },
+            "time": "2019-05-19T20:59:27+00:00"
         },
         {
             "name": "psr/container",
@@ -7760,7 +7918,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "prestashop/prestashop-webservice-lib": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

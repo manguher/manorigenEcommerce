@@ -1,67 +1,46 @@
- <!-- ======= Footer ======= -->
- <footer id="footer" class="footer">
-
-    <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-geo-alt icon"></i>
-          <div>
-            <h4>Address</h4>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022 - US<br>
-            </p>
-          </div>
-
+<footer class="bg-dark text-white">
+    <div class="container py-4">
+        <div class="row py-5">
+            <div class="col-md-4 mb-3 mb-md-0">
+                <h6 class="text-uppercase mb-3">Customer services</h6>
+                <ul class="list-unstyled mb-0">
+                    <li><a class="footer-link" href="#!">Help &amp; Contact Us</a></li>
+                    <li><a class="footer-link" href="#!">Returns &amp; Refunds</a></li>
+                    <li><a class="footer-link" href="#!">Online Stores</a></li>
+                    <li><a class="footer-link" href="#!">Terms &amp; Conditions</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4 mb-3 mb-md-0">
+                <h6 class="text-uppercase mb-3">Company</h6>
+                <ul class="list-unstyled mb-0">
+                    <li><a class="footer-link" href="#!">What We Do</a></li>
+                    <li><a class="footer-link" href="#!">Available Services</a></li>
+                    <li><a class="footer-link" href="#!">Latest Posts</a></li>
+                    <li><a class="footer-link" href="#!">FAQs</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h6 class="text-uppercase mb-3">Social media</h6>
+                <ul class="list-unstyled mb-0">
+                    <li><a class="footer-link" href="#!">Twitter</a></li>
+                    <li><a class="footer-link" href="#!">Instagram</a></li>
+                    <li><a class="footer-link" href="#!">Tumblr</a></li>
+                    <li><a class="footer-link" href="#!">Pinterest</a></li>
+                </ul>
+            </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 footer-links d-flex">
-          <i class="bi bi-telephone icon"></i>
-          <div>
-            <h4>Reservations</h4>
-            <p>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-          </div>
+        <div class="border-top pt-4" style="border-color: #1d1d1d !important">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p class="small text-muted mb-0">&copy; 2021 All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <p class="small text-muted mb-0">Template designed by <a class="text-white reset-anchor"
+                            href="https://bootstrapious.com/p/boutique-bootstrap-e-commerce-template">Bootstrapious</a>
+                    </p>
+                    <!-- If you want to remove the backlink, please purchase the Attribution-Free License. See details in readme.txt or license.txt. Thanks!-->
+                </div>
+            </div>
         </div>
-
-        <div class="col-lg-3 col-md-6 footer-links d-flex">
-          <i class="bi bi-clock icon"></i>
-          <div>
-            <h4>Opening Hours</h4>
-            <p>
-              <strong>Mon-Sat: 11AM</strong> - 23PM<br>
-              Sunday: Closed
-            </p>
-          </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6 footer-links">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-
-      </div>
     </div>
-
-    <div class="container">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-
-  </footer><!-- End Footer -->
-  <!-- End Footer -->
+</footer>

@@ -5,6 +5,7 @@ namespace App\Services\Implement;
 use App\Services\Interfaces\ProductInterface;
 use App\Services\Interfaces\CategoryInterface;
 use GuzzleHttp\Client;
+use Protechstudio\PrestashopWebService\PrestashopWebService;
 
 class ProductsRepo implements ProductInterface
 {
@@ -12,8 +13,9 @@ class ProductsRepo implements ProductInterface
     protected $http;
     protected $headers;
     private CategoryInterface $categoryInterface;
+    private $prestashop;
 
-    public function __construct(Client $client, CategoryInterface $categoryInterface)
+    public function __construct(Client $client, CategoryInterface $categoryInterface, PrestashopWebService $prestashop)
     {
         $this->url = config('constants.apiUrl');
         $this->http = $client;
@@ -23,10 +25,15 @@ class ProductsRepo implements ProductInterface
         ];
 
         $this->categoryInterface = $categoryInterface;
+        $this->prestashop = $prestashop;
     }
 
     public function getAllProducts()
     {
+
+        $hola['resource'] = 'products';
+        $xml = $this->prestashop->get($hola);
+
         $full_path = $this->url . 'products?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
         $response = $this->http->get($full_path, [
             'headers'         => $this->headers,
@@ -70,13 +77,28 @@ class ProductsRepo implements ProductInterface
 
     public function getProductsById($productId)
     {
-        $full_path = $this->url . 'products/' . $productId .'?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
+        // get obj
+        $full_path = $this->url . 'products/' . $productId . '?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
         $response = $this->http->get($full_path, [
             'headers'         => $this->headers,
             'timeout'         => 30,
             'connect_timeout' => 30,
             'http_errors'     => true,
         ]);
-        return json_decode($response->getBody(), true);
-    }
+
+        // add image url
+        $res = json_decode($response->getBody(), true);
+        foreach ($res['products'] as $key => $value) {
+            $combinationLst = $res['products'][0]['associations']['combinations'];
+            $res['products'][$key]['url_image_default'] =  $this->url . 'images/products/' . $value['id'] . '/' . $value['id_default_image'] . '?ws_key=' . config('constants.apiKey');
+            $res['products'][$key]['associations']['combinations']  = $this->getProductCombinations($combinationLst);
+
+            $stock = 0;
+            foreach ($res['products'][$key]['associations']['combinations'] as $combi) {
+                $stock += $combi['quantity'];
+            }
+            $res['products'][$key]['stock'] = $stock > 0 ? 'Disponible' : 'Sin Stock';
+        }
+        return $res;
+    } 
 }

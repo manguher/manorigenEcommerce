@@ -1,45 +1,41 @@
-
-<header id="header" class="header fixed-top d-flex align-items-center">
-    <div class="container d-flex align-items-center justify-content-between">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Manorigen<span>.</span></h1>
-      </a>
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a href="#hero">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#menu">Menu</a></li>
-          <li><a href="#events">Events</a></li>
-          <li><a href="#chefs">Chefs</a></li>
-          <li><a href="#gallery">Gallery</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-down dropdown-indicator"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
+<header class="header bg-white">
+    <div class="container px-lg-3">
+        <nav class="navbar navbar-expand-lg navbar-light py-3 px-lg-0"><a class="navbar-brand" href="index.html"><span
+                    class="fw-bold text-uppercase text-dark">Manorigen</span></a>
+            <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <!-- Link--><a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Link--><a class="nav-link" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Link--><a class="nav-link active" href="detail.html">Productos</a>
+                    </li>
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" id="pagesDropdown" href="#"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Pages</a>
+                        <div class="dropdown-menu mt-3 shadow-sm" aria-labelledby="pagesDropdown"><a
+                                class="dropdown-item border-0 transition-link" href="index.html">Homepage</a><a
+                                class="dropdown-item border-0 transition-link" href="shop.html">Category</a><a
+                                class="dropdown-item border-0 transition-link" href="detail.html">Product detail</a><a
+                                class="dropdown-item border-0 transition-link" href="cart.html">Shopping cart</a><a
+                                class="dropdown-item border-0 transition-link" href="checkout.html">Checkout</a></div>
+                    </li>
                 </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </nav><!-- .navbar -->
-
-      <a class="btn-book-a-table" href="#book-a-table">Book a Table</a>
-      <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-      <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="cart.html"> <i
+                                class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small
+                                class="text-gray fw-normal">(2)</small></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!"> <i class="far fa-heart me-1"></i><small
+                                class="text-gray fw-normal"> (0)</small></a></li>
+                    <li class="nav-item"><a class="nav-link" href="#!"> <i
+                                class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li>
+                </ul>
+            </div>
+        </nav>
     </div>
-  </header><!-- End Header -->
+</header>

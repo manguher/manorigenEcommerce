@@ -9,7 +9,7 @@
                         class="menu-img img-fluid" alt=""></a>
                 <h4>{{ $item['name'] }}</h4>
                 <p class="ingredients">
-                    {{ $item['description_short'] }}
+                    {{ strip_tags($item['description_short']) }}
                 </p>
                 <p class="price">
                     ${{$item['price'] }}
