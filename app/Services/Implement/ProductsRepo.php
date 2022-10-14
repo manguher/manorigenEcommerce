@@ -30,10 +30,6 @@ class ProductsRepo implements ProductInterface
 
     public function getAllProducts()
     {
-
-        $hola['resource'] = 'products';
-        $xml = $this->prestashop->get($hola);
-
         $full_path = $this->url . 'products?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
         $response = $this->http->get($full_path, [
             'headers'         => $this->headers,
@@ -100,5 +96,29 @@ class ProductsRepo implements ProductInterface
             $res['products'][$key]['stock'] = $stock > 0 ? 'Disponible' : 'Sin Stock';
         }
         return $res;
-    } 
+    }
+
+    public function getProductCombinations($combinationLst)
+    {
+        // get obj
+        $full_path = $this->url . 'combinations/?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
+        $response = $this->http->get($full_path, [
+            'headers'         => $this->headers,
+            'timeout'         => 30,
+            'connect_timeout' => 30,
+            'http_errors'     => true,
+        ]);
+
+        $combinations = [];
+        $Allcombination = json_decode($response->getBody(), true);
+        foreach ($combinationLst as $key => $item) {
+            foreach ($Allcombination['combinations'] as $key => $value) {
+                if($item['id'] == $value['id']){
+                    array_push($combinations, $value);
+                    break;
+                }
+            }
+        }
+        return $combinations;
+    }
 }

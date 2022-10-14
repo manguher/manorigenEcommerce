@@ -81,6 +81,9 @@
                                 class="far fa-heart me-2"></i>Add
                             to wish list</a><br>
                         <ul class="list-unstyled small d-inline-block">
+                            <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">Stock:</strong><span
+                                    class="ms-2 text-muted">{{$item['stock'] }}</span></li>
+
                             <li class="px-3 py-2 mb-1 bg-white"><strong class="text-uppercase">SKU:</strong><span
                                     class="ms-2 text-muted">039</span></li>
                             <li class="px-3 py-2 mb-1 bg-white text-muted"><strong
