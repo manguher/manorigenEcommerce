@@ -16,9 +16,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/detalle/{id}', [ProductController::class, 'index']);
+Route::get('/cart/detail', [CartController::class, 'detail']);
+Route::get('/cart/delete/{id}', [CartController::class, 'deleteItem']);
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/{id}', [HomeController::class, 'getAllProductsByCategoryId']);
 Route::get('/cart/add/{id}', [CartController::class, 'add']);
+
 
 

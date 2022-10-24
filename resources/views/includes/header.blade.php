@@ -27,13 +27,13 @@
                     </li>
                 </ul>
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="cart.html"> <i
-                                class="fas fa-dolly-flatbed me-1 text-gray"></i>Cart<small
-                                class="text-gray fw-normal">(2)</small></a></li>
-                    <li class="nav-item"><a class="nav-link" href="#!"> <i class="far fa-heart me-1"></i><small
+                    <li class="nav-item" id="header-cart">
+                        @include('pages.header-cart', ['cartCountItems' => count(\Cart::getContent())])
+                    </li>
+                    {{-- <li class="nav-item"><a class="nav-link" href="#!"> <i class="far fa-heart me-1"></i><small
                                 class="text-gray fw-normal"> (0)</small></a></li>
                     <li class="nav-item"><a class="nav-link" href="#!"> <i
-                                class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li>
+                                class="fas fa-user me-1 text-gray fw-normal"></i>Login</a></li> --}}
                 </ul>
             </div>
         </nav>

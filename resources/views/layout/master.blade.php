@@ -27,5 +27,6 @@
     integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/home.js') }}"></script>
+<script src="{{ asset('js/cart.js') }}"></script>
 
 </html>

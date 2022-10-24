@@ -6,7 +6,8 @@ use App\Services\Interfaces\CartInterface;
 use Darryldecode\Cart\Cart;
 use GuzzleHttp\Client;
 use Protechstudio\PrestashopWebService\PrestashopWebService;
-use Illuminate\Support\Facades\Auth;
+use App\Services\Interfaces\CategoryInterface;
+use App\Services\Interfaces\ProductInterface;
 
 class CartRepo implements CartInterface
 {
@@ -14,8 +15,9 @@ class CartRepo implements CartInterface
     protected $http;
     protected $headers;
     private $prestashop;
+    private ProductInterface $productInterface;
 
-    public function __construct(Client $client, PrestashopWebService $prestashop)
+    public function __construct(Client $client, PrestashopWebService $prestashop, ProductInterface $productInterface)
     {
         $this->url = config('constants.apiUrl');
         $this->http = $client;
@@ -23,57 +25,55 @@ class CartRepo implements CartInterface
             'cache-control' => 'no-cache',
             'content-type' => 'application/x-www-form-urlencoded',
         ];
-
+        $this->productInterface = $productInterface;
         $this->prestashop = $prestashop;
     }
 
-    // public function getAllCategories() 
-    // {
-    //     $full_path = $this->url . 'categories?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
-    //     $response = $this->http->get($full_path, [
-    //         'headers'         => $this->headers,
-    //         'timeout'         => 100,
-    //         'connect_timeout' => true,
-    //         'http_errors'     => true,
-    //     ]);
-    //     $res = json_decode($response->getBody(), true);
-    //     $category = collect($res['categories'])->filter(function ($value) {
-    //         return $value['id_parent'] == '2';
-    //     });
-    //     return $category;
-    // }
-
-    public function addCart($productoId)
+    public function addCart($productId)
     {
         $idCustomer = session('idCustomer');
+        $product = $this->productInterface->getProductsById($productId);
+        // $name = $product['products'][0]['name'];
+        // $price = (float)$product['products'][0]['price'];
 
-        \Cart::session($idCustomer)->add(array(
-            'id' => 1,
-            'name' => 'asdas',
-            'price' => 11,
-            'quantity' => 4,
-            'attributes' => array(),
-            'associatedModel' => 11
+        \Cart::add(array(
+            'id' => $productId, // inique row ID
+            'name' => $product['products'][0]['name'],
+            'price' => (float)$product['products'][0]['price'],
+            'quantity' => 1,
+            'attributes' => array()
         ));
-
-        $items = \Cart::getContent();
-        
-        $xml = $this->prestashop->get([
-            'resource' => 'customers',
-            'id' => 1, // Here we use hard coded value but of course you could get this ID from a request parameter or anywhere else
-        ]);
-        return  null;
+        return  count(\Cart::getContent());
     }
 
     public function getCart()
     {
+        // foreach($items as $row) {
+
+        // 	echo $row->id; // row ID
+        // 	echo $row->name;
+        // 	echo $row->qty;
+        // 	echo $row->price;
+
+        // 	echo $item->associatedModel->id; // whatever properties your model have
+        //         echo $item->associatedModel->name; // whatever properties your model have
+        //         echo $item->associatedModel->description; // whatever properties your model have
+        // }
+        $items = \Cart::getContent();
+        return \Cart::getContent();
     }
 
-    public function deleteCart()
+    public function deleteItem($idProduct)
     {
+        \Cart::remove($idProduct);
+        return  count(\Cart::getContent());
     }
 
-    public function updateCart()
+    public function updateCart($idProductom, $cantidad)
     {
+        // Cart::update($idProducto, array(
+        //     'name' => 'New Item Name', // new item name
+        //     'price' => 98.67, // new item price, price can also be a string format like so: '98.67'
+        //   ));
     }
 }
