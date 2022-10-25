@@ -23,6 +23,8 @@ Route::get('/cart/delete/{id}', [CartController::class, 'deleteItem']);
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/{id}', [HomeController::class, 'getAllProductsByCategoryId']);
 Route::get('/cart/add/{id}', [CartController::class, 'add']);
+Route::get('/cart/addquantity/{id}', [CartController::class, 'addQuantity']);
+Route::post('/cart/update', [CartController::class, 'update']);
 
 
 

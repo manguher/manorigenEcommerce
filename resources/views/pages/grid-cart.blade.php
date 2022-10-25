@@ -31,23 +31,29 @@
                             <div class="border d-flex align-items-center justify-content-between px-3">
                                 <span class="small text-uppercase text-gray headings-font-family">Cantidad</span>
                                 <div class="quantity">
-                                    <button class="dec-btn p-0"><i class="fas fa-caret-left"></i></button>
-                                    <input class="form-control form-control-sm border-0 shadow-0 p-0" type="text"
+                                    <span class="spinner-border spinner-border-sm spinner-quantity-cart" role="status"
+                                        aria-hidden="true" style="margin-right: 5px; display: none;"></span>
+                                    <button class="p-0 btn-minus-quantity"><i
+                                            class="fas fa-caret-left"></i></button>
+                                    <input class="form-control form-control-sm border-0 shadow-0 p-0 txt-quantity"
+                                        data-idprouct="{{ $item['id'] }}" type="text"
                                         value="{{ $item['quantity'] }}" />
-                                    <button class="inc-btn p-0"><i class="fas fa-caret-right"></i></button>
+                                    <button class="p-0 btn-plus-quantity"><i
+                                            class="fas fa-caret-right"></i></button>
                                 </div>
                             </div>
                         </td>
                         <td class="p-3 align-middle border-light">
-                            <p class="mb-0 small">$250</p>
+                            <p class="mb-0 small">{{ $item['quantity'] * $item['price'] }}</p>
                         </td>
-                        <td class="p-3 align-middle border-light"><a class="reset-anchor"
-                                data-productid="{{ $item['id'] }}"><i
-                                    class="fas fa-trash-alt small text-muted"></i></a>
+                        <td class="p-3 align-middle border-light">
+                            <a class="reset-anchor" data-productid="{{ $item['id'] }}">
+                                <span class="spinner-border spinner-border-sm spinner-delete-cart" role="status"
+                                    aria-hidden="true" style="margin-right: 5px; display: none;"></span>
+                                <i class="fas fa-trash-alt small text-muted" id="spinner-delete-cart"></i></a>
                         </td>
                     </tr>
                 @endforeach
-
             </tbody>
         </table>
     </div>
@@ -70,10 +76,10 @@
             <ul class="list-unstyled mb-0">
                 <li class="d-flex align-items-center justify-content-between"><strong
                         class="text-uppercase small font-weight-bold">Subtotal</strong><span
-                        class="text-muted small">$250</span></li>
+                        class="text-muted small">{{\Cart::getSubTotal();}}</span></li>
                 <li class="border-bottom my-2"></li>
                 <li class="d-flex align-items-center justify-content-between mb-4"><strong
-                        class="text-uppercase small font-weight-bold">Total</strong><span>$250</span>
+                        class="text-uppercase small font-weight-bold">Total</strong><span>{{\Cart::getTotal();}}</span>
                 </li>
                 <li>
                     <form action="#">

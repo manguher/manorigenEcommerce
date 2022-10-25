@@ -43,7 +43,7 @@ class CartRepo implements CartInterface
             'quantity' => 1,
             'attributes' => array()
         ));
-        return  count(\Cart::getContent());
+        return  \Cart::getContent();
     }
 
     public function getCart()
@@ -69,11 +69,13 @@ class CartRepo implements CartInterface
         return  count(\Cart::getContent());
     }
 
-    public function updateCart($idProductom, $cantidad)
+    public function updateCart($idProduct, $quantity)
     {
-        // Cart::update($idProducto, array(
-        //     'name' => 'New Item Name', // new item name
-        //     'price' => 98.67, // new item price, price can also be a string format like so: '98.67'
-        //   ));
+        \Cart::update($idProduct, array(
+            'quantity' => array(
+                'relative' => false,
+                'value' => $quantity
+            ),
+          ));
     }
 }

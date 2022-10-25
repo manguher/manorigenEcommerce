@@ -76,7 +76,7 @@
                             </div>
                             <div class="col-sm-3 pl-sm-0">
                                 <a class="btn btn-dark btn-sm btn-block h-100 d-flex align-items-center justify-content-center px-0 add-cart" data-productid = "{{ $item['id']}}"
-                                    href="#">Añadir al carro</a>
+                                    href="#"><span class="spinner-border spinner-border-sm spinner-add-cart" role="status" aria-hidden="true" style="margin-right: 5px; display: none;"></span>Añadir al carro</a>
                             </div>
                         </div><a class="text-dark p-0 mb-4 d-inline-block" href="#!"><i
                                 class="far fa-heart me-2"></i>Add

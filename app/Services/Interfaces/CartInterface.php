@@ -5,6 +5,6 @@ interface CartInterface
 {
     public function getCart();
     public function deleteItem($idProducto);
-    public function updateCart($idProducto, $cantidad);
+    public function updateCart($idProducto, $quantity);
     public function addCart($idProducto);
 }

@@ -27,15 +27,39 @@ class CartController extends Controller
         if (!$request->session()->has('idCustomer'))
             $request->session()->put('idCustomer', 123);
 
-        $cartCountItems = $this->cartInterface->addCart($productoId);
-        $html = view('pages.header-cart', compact('cartCountItems'));
-        return $html;
+        $this->cartInterface->addCart($productoId);
+        return view('pages.header-cart');
+    }
+
+    public function addQuantity(Request $request, $productoId)
+    {
+        $cart = $this->cartInterface->addCart($productoId);
+        $htmlGrid = view('pages.grid-cart', compact('cart'))->render();
+
+        return response()->json([
+            'htmlGrid' => $htmlGrid
+        ]);
+        
+        return $htmlGrid;
     }
 
     public function detail()
     {
         $cart = $this->cartInterface->getCart();
         return view('pages.detail-cart',  compact('cart'));
+    }
+
+    public function update(Request $request)
+    {
+        $input = $request->all();
+        $productId = $input['productId'];
+        $quantity = $input['quantity'];
+        $this->cartInterface->updateCart((int)$productId, (int)$quantity);
+        $cart = $this->cartInterface->getCart();
+        $htmlGrid = view('pages.grid-cart', compact('cart'))->render();
+        return response()->json([
+            'htmlGrid' => $htmlGrid
+        ]);
     }
 
     public function deleteItem($productId)
