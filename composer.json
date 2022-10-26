@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.4",
         "prestashop/prestashop-webservice-lib": "dev-master",
-        "protechstudio/laravel-prestashop-webservice": "^3.5"
+        "protechstudio/laravel-prestashop-webservice": "^3.5",
+        "transbank/transbank-sdk": "~2.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
