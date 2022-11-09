@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Transbank\Webpay\WebpayPlus;
 use Transbank\Webpay\WebpayPlus\Transaction;
+use App\Services\Interfaces\OrderInterface;
 
 class TransBankController extends Controller
 {
-    public function __construct()
+    private OrderInterface $orderInterface;
+
+    public function __construct(OrderInterface $orderInterface)
     {
+        $this->orderInterface = $orderInterface;
+
         if (app()->environment('production')) {
             WebpayPlus::configureForProduction(
                 env('webpay_plus_cc'),
@@ -21,8 +26,10 @@ class TransBankController extends Controller
 
     public function index(Request $request)
     {
-       $urlToPay = self::initWebPayTransaction($request);
-       return $urlToPay;
+        // generar orden de compra
+        $this->orderInterface->createOrder($request);
+        // $urlToPay = self::initWebPayTransaction($request);
+        // return $urlToPay;
     }
 
     public function initWebPayTransaction(Request $request)
@@ -33,8 +40,19 @@ class TransBankController extends Controller
             111,
             route('payment_confirm')
         );
-
-        $url = $transaction->getUrl().'?token_ws='.$transaction->getToken();
+        $url = $transaction->getUrl() . '?token_ws=' . $transaction->getToken();
         return $url;
+    }
+
+    public function paymentConfirm(Request $request)
+    {
+        $confirmation = (new Transaction)->commit($request->get('token_ws'));
+        $compra = ''; // get orden de compra
+        if ($confirmation->isApproved()) {
+            // actualiza orden de compra a estado aprovada (desde la API)
+            return redirect(env('URL_FRONT_AFTER_PAYMENT') . "?ordenId={$compra}");
+        } else {
+            return redirect(env('URL_FRONT_AFTER_PAYMENT') . "?ordenId={$compra}");
+        }
     }
 }

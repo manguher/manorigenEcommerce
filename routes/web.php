@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/payment', [TransBankController::class, 'index']);
-Route::get('/payment_confirm', [TransBankController::class, 'initWebPayTransaction'])->name('payment_confirm');
+Route::get('/payment_confirm', [TransBankController::class, 'paymentConfirm'])->name('payment_confirm');
 Route::get('/checkout', [CheckoutController::class, 'index']);
 Route::get('/detalle/{id}', [ProductController::class, 'index']);
 Route::get('/cart/detail', [CartController::class, 'detail']);

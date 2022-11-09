@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\Implement\OrderRepo;
+use App\Services\Interfaces\OrderInterface;
 use App\Services\Implement\CategoryRepo;
 use App\Services\Interfaces\CategoryInterface;
 use App\Services\Interfaces\CartInterface;
@@ -22,6 +24,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CategoryInterface::class, CategoryRepo::class);
         $this->app->bind(ProductInterface::class, ProductsRepo::class);
         $this->app->bind(CartInterface::class, CartRepo::class);
+        $this->app->bind(OrderInterface::class, OrderRepo::class);
     }
 
     /**
