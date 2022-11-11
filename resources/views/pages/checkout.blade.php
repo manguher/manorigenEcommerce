@@ -25,53 +25,69 @@
             <h2 class="h5 text-uppercase mb-4">Detalle Facturación</h2>
             <div class="row">
                 <div class="col-lg-8">
-                    <form action="#">
+                    <form id="form-checkout">
                         <div class="row gy-3">
                             <div class="col-lg-6">
                                 <label class="form-label text-sm text-uppercase" for="firstName">Nombres</label>
-                                <input class="form-control form-control-lg" type="text" id="firstName"
+                                <input class="form-control form-control-lg" type="text" id="firstName" name="firstName"
                                     placeholder="Ingrese nombre">
                             </div>
                             <div class="col-lg-6">
+                                <label class="form-label text-sm text-uppercase" for="firstName">Apellido</label>
+                                <input class="form-control form-control-lg" type="text" id="lastname" name="lastname"
+                                    placeholder="Ingrese apellido">
+                            </div>
+                            <div class="col-lg-6">
                                 <label class="form-label text-sm text-uppercase" for="email">Email</label>
-                                <input class="form-control form-control-lg" type="email" id="email"
+                                <input class="form-control form-control-lg" type="email" id="email" name="email"
                                     placeholder="e.g. 123@ejemplo.com">
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label text-sm text-uppercase" for="phone">Telefono</label>
-                                <input class="form-control form-control-lg" type="tel" id="phone"
+                                <input class="form-control form-control-lg" type="tel" id="phone" name="phone"
                                     placeholder="e.g. +569 123465798">
                             </div>
                             <div class="col-lg-6">
                                 <label class="form-label text-sm text-uppercase" for="company">Empresa (optional)
                                 </label>
-                                <input class="form-control form-control-lg" type="text" id="company"
+                                <input class="form-control form-control-lg" type="text" id="company" name="company"
                                     placeholder="Empresa">
                             </div>
-                            <div class="col-lg-6 form-group">
+
+                            {{-- <div class="col-lg-6 form-group">
                                 <label class="form-label text-sm text-uppercase" for="country">Pais</label>
-                                <select class="country" id="country"
+                                <select class="country" id="country" name="country"
                                     data-customclass="form-control form-control-lg rounded-0">
                                     <option value>Selecciona pais</option>
                                 </select>
+                            </div> --}}
+
+                            <div class="col-lg-6">
+                                <label class="form-label text-sm text-uppercase" for="state">Seleccione Región </label>
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    id="state" name="state">
+                                    <option value='0' selected>Seleccione Región</option>
+                                    @foreach ($cities['states'] as $item)
+                                        <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="state">Seleccione Ciudad </label>
-                                <input class="form-control form-control-lg" type="text" id="state">
+                                <label class="form-label text-sm text-uppercase" for="city">Ciudad </label>
+                                <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example"
+                                    id="cities" name="cities">
+                                    <option value='0' selected>Seleccione Ciudad</option>
+                                </select>
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label text-sm text-uppercase" for="address">Dirección 1</label>
-                                <input class="form-control form-control-lg" type="text" id="address"
+                                <input class="form-control form-control-lg" type="text" id="address1" name="address1"
                                     placeholder="Num Casa y nombre calle">
                             </div>
                             <div class="col-lg-12">
                                 <label class="form-label text-sm text-uppercase" for="addressalt">Dirección 2 </label>
-                                <input class="form-control form-control-lg" type="text" id="addressalt"
+                                <input class="form-control form-control-lg" type="text" id="address2" name="address2"
                                     placeholder="Departamento, villa, etc (optional)">
-                            </div>
-                            <div class="col-lg-6">
-                                <label class="form-label text-sm text-uppercase" for="city">Ciudad </label>
-                                <input class="form-control form-control-lg" type="text" id="city">
                             </div>
 
                             <div class="col-lg-6">
@@ -149,8 +165,9 @@
                                     </div>
                                 </div>
                             </div> --}}
+                            <input type="hidden" name="total" value="${{ \Cart::getTotal() }}">
                             <div class="col-lg-12 form-group">
-                                <button class="btn btn-dark" type="submit">Pagar</button>
+                                <button class="btn btn-dark" type="button" id="btn-gopayment">Pagar</button>
                             </div>
                         </div>
                     </form>
@@ -168,7 +185,8 @@
                                     </li>
                                 @endforeach
 
-                                <li class="d-flex align-items-center justify-content-between" style="margin-top: 15px;"><strong
+                                <li class="d-flex align-items-center justify-content-between" style="margin-top: 15px;">
+                                    <strong
                                         class="text-uppercase small fw-bold">Total</strong><span>${{ \Cart::getTotal() }}</span>
                                 </li>
 

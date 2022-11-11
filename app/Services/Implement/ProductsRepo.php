@@ -10,7 +10,7 @@ use Protechstudio\PrestashopWebService\PrestashopWebService;
 class ProductsRepo implements ProductInterface
 {
     protected $url;
-    protected $http;
+    protected $http;    
     protected $headers;
     private CategoryInterface $categoryInterface;
     private $prestashop;
@@ -30,7 +30,7 @@ class ProductsRepo implements ProductInterface
 
     public function getAllProducts()
     {
-        $full_path = $this->url . 'products?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
+        $full_path = $this->url . '/api/products?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
         $response = $this->http->get($full_path, [
             'headers'         => $this->headers,
             'timeout'         => 30,
@@ -63,7 +63,7 @@ class ProductsRepo implements ProductInterface
             foreach ($allProducts['products'] as $key => $value) {
                 if ($item['id'] == $value['id']) {
                     $allProducts['products'][$key]['id_parent_cat'] = $item['id_parent_category'];
-                    $allProducts['products'][$key]['url_image_default'] =  $this->url . 'images/products/' . $item['id'] . '/' . $value['id_default_image'] . '?ws_key=' . config('constants.apiKey');
+                    $allProducts['products'][$key]['url_image_default'] =  $this->url . '/api/images/products/' . $item['id'] . '/' . $value['id_default_image'] . '?ws_key=' . config('constants.apiKey');
                     array_push($productsLst, $allProducts['products'][$key]);
                 }
             }
@@ -74,7 +74,7 @@ class ProductsRepo implements ProductInterface
     public function getProductsById($productId)
     {
         // get obj
-        $full_path = $this->url . 'products/' . $productId . '?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
+        $full_path = $this->url . '/api/products/' . $productId . '?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
         $response = $this->http->get($full_path, [
             'headers'         => $this->headers,
             'timeout'         => 30,
@@ -86,7 +86,7 @@ class ProductsRepo implements ProductInterface
         $res = json_decode($response->getBody(), true);
         foreach ($res['products'] as $key => $value) {
             $combinationLst = $res['products'][0]['associations']['combinations'];
-            $res['products'][$key]['url_image_default'] =  $this->url . 'images/products/' . $value['id'] . '/' . $value['id_default_image'] . '?ws_key=' . config('constants.apiKey');
+            $res['products'][$key]['url_image_default'] =  $this->url . '/api/images/products/' . $value['id'] . '/' . $value['id_default_image'] . '?ws_key=' . config('constants.apiKey');
             $res['products'][$key]['associations']['combinations']  = $this->getProductCombinations($combinationLst);
 
             $stock = 0;
@@ -101,7 +101,7 @@ class ProductsRepo implements ProductInterface
     public function getProductCombinations($combinationLst)
     {
         // get obj
-        $full_path = $this->url . 'combinations/?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
+        $full_path = $this->url . '/api/combinations/?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
         $response = $this->http->get($full_path, [
             'headers'         => $this->headers,
             'timeout'         => 30,

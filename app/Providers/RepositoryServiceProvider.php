@@ -9,6 +9,8 @@ use App\Services\Interfaces\CategoryInterface;
 use App\Services\Interfaces\CartInterface;
 use App\Services\Implement\CartRepo;
 use App\Services\Implement\ProductsRepo;
+use App\Services\Interfaces\CityInterface;
+use App\Services\Implement\CityRepo;
 use App\Services\Interfaces\ProductInterface;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +27,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(ProductInterface::class, ProductsRepo::class);
         $this->app->bind(CartInterface::class, CartRepo::class);
         $this->app->bind(OrderInterface::class, OrderRepo::class);
+        $this->app->bind(CityInterface::class, CityRepo::class);
     }
 
     /**

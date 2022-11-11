@@ -23,7 +23,7 @@ class CategoryRepo implements CategoryInterface
 
     public function getAllCategories()
     {
-        $full_path = $this -> url . 'categories?ws_key=' . config('constants.apiKey' ) . '&display=full&output_format=JSON';
+        $full_path = $this -> url . '/api/categories?ws_key=' . config('constants.apiKey' ) . '&display=full&output_format=JSON';
         $response = $this->http->get($full_path, [
             'headers'         => $this->headers,
             'timeout'         => 100,
@@ -39,7 +39,7 @@ class CategoryRepo implements CategoryInterface
 
     public function getProductsByCategory($contegoryId)
     {
-        $full_path = $this -> url . 'products?ws_key=' . config('constants.apiKey' ) . '&display=[id, name]&output_format=JSON';
+        $full_path = $this -> url . '/api/products?ws_key=' . config('constants.apiKey' ) . '&display=[id, name]&output_format=JSON';
         $response = $this->http->get($full_path, [
             'headers'         => $this->headers,
             'timeout'         => 30,

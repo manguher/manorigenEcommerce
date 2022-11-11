@@ -19,9 +19,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/payment', [TransBankController::class, 'index']);
+Route::post('/payment', [TransBankController::class, 'index']);
 Route::get('/payment_confirm', [TransBankController::class, 'paymentConfirm'])->name('payment_confirm');
 Route::get('/checkout', [CheckoutController::class, 'index']);
+Route::get('/checkout/getCities/{id}', [CheckoutController::class, 'getCitiesByIdState']);
 Route::get('/detalle/{id}', [ProductController::class, 'index']);
 Route::get('/cart/detail', [CartController::class, 'detail']);
 Route::get('/cart/delete/{id}', [CartController::class, 'deleteItem']);

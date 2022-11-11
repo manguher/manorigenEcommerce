@@ -28,5 +28,6 @@
 <script src="{{ asset('js/main.js') }}"></script>
 <script src="{{ asset('js/home.js') }}"></script>
 <script src="{{ asset('js/cart.js') }}"></script>
+<script src="{{ asset('js/checkout.js') }}"></script>
 
 </html>

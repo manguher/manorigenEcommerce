@@ -26,10 +26,12 @@ class TransBankController extends Controller
 
     public function index(Request $request)
     {
+      
         // generar orden de compra
         $this->orderInterface->createOrder($request);
-        // $urlToPay = self::initWebPayTransaction($request);
-        // return $urlToPay;
+        $urlToPay = self::initWebPayTransaction($request);
+        return $urlToPay;
+        return null;
     }
 
     public function initWebPayTransaction(Request $request)
