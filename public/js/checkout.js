@@ -9,7 +9,7 @@ $(document).ready(function () {
             type: 'post',
             data: data,
             success: function (data) {
-                $(".spinner-quantity-cart").hide();
+                $(location).prop('href', data)
             },
             statusCode: {
                 404: function () {
@@ -33,7 +33,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $.each(data, function (i, item) {
-                    $('#cities').append('<option value="'+item+'">'+item+'</option>');
+                    $('#cities').append('<option value="' + item + '">' + item + '</option>');
                 });
             },
             statusCode: {

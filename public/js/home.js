@@ -6,6 +6,7 @@ $(document).ready(function () {
         success: function (response) {
             var tablaDatos = $("#tab-product-home");
             tablaDatos.append(response);
+
         },
         statusCode: {
             404: function () {

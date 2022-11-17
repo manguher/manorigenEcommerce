@@ -33,6 +33,7 @@ class HomeController extends Controller
         $html = view('pages.home-product')
                 ->with('productsHome', $productsByCategory)
                 ->render();
-        return response()->json($html);
+
+        return $html;
     }
 }

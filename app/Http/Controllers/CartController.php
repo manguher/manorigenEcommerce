@@ -28,18 +28,14 @@ class CartController extends Controller
             $request->session()->put('idCustomer', 123);
 
         $this->cartInterface->addCart($productoId);
-        return view('pages.header-cart');
+        $htmlGrid = view('pages.header-cart')->render();
+        return $htmlGrid;
     }
 
     public function addQuantity(Request $request, $productoId)
     {
         $cart = $this->cartInterface->addCart($productoId);
         $htmlGrid = view('pages.grid-cart', compact('cart'))->render();
-
-        return response()->json([
-            'htmlGrid' => $htmlGrid
-        ]);
-        
         return $htmlGrid;
     }
 
@@ -57,9 +53,7 @@ class CartController extends Controller
         $this->cartInterface->updateCart((int)$productId, (int)$quantity);
         $cart = $this->cartInterface->getCart();
         $htmlGrid = view('pages.grid-cart', compact('cart'))->render();
-        return response()->json([
-            'htmlGrid' => $htmlGrid
-        ]);
+        return $htmlGrid;
     }
 
     public function deleteItem($productId)

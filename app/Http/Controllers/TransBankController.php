@@ -26,20 +26,17 @@ class TransBankController extends Controller
 
     public function index(Request $request)
     {
-      
-        // generar orden de compra
-        $this->orderInterface->createOrder($request);
-        $urlToPay = self::initWebPayTransaction($request);
+        $order = $this->orderInterface->createOrder($request);
+        $urlToPay = self::initWebPayTransaction($order);
         return $urlToPay;
-        return null;
     }
 
-    public function initWebPayTransaction(Request $request)
+    public function initWebPayTransaction($order)
     {
         $transaction = (new Transaction)->create(
-            123,
-            "123456",
-            111,
+            (int)$order->id, // id order
+            "123", // sesion id TODO
+            (int)$order->total_paid, // total
             route('payment_confirm')
         );
         $url = $transaction->getUrl() . '?token_ws=' . $transaction->getToken();
@@ -49,12 +46,14 @@ class TransBankController extends Controller
     public function paymentConfirm(Request $request)
     {
         $confirmation = (new Transaction)->commit($request->get('token_ws'));
-        $compra = ''; // get orden de compra
-        if ($confirmation->isApproved()) {
-            // actualiza orden de compra a estado aprovada (desde la API)
-            return redirect(env('URL_FRONT_AFTER_PAYMENT') . "?ordenId={$compra}");
+        $compraId = $confirmation->buyOrder;
+        if ($confirmation->isApproved()) 
+        {
+            $this->orderInterface->updateOrderHistoriesState($compraId, 2); // TODO id estado compra 
+            \Cart::clear();
+            return redirect(env('URL_FRONT_AFTER_PAYMENT') . "?ordenId={$compraId}");
         } else {
-            return redirect(env('URL_FRONT_AFTER_PAYMENT') . "?ordenId={$compra}");
+            return redirect(env('URL_FRONT_AFTER_PAYMENT') . "?ordenId={$compraId}");
         }
     }
 }

@@ -49,7 +49,7 @@ class OrderRepo implements OrderInterface
 
         try {
 
-            $webService = new PrestaShopWebservice($this->url, config('constants.apiKey'), true);
+            $webService = new PrestaShopWebservice($this->url, config('constants.apiKey'), false);
             $xml = $webService->get(array('url' => $this->url . '/api/customers/?schema=synopsis'));
             $customer = array();
             $product = array();
@@ -63,7 +63,7 @@ class OrderRepo implements OrderInterface
             $id['lang'] = '1';
             $id['currency'] = '1';
             $id['carrier'] = '2';
-            $id['guest'] = '1';   
+            $id['guest'] = '1';
 
             $xml->customer->id_default_group = '3';
             $xml->customer->id_lang = '1';
@@ -97,7 +97,7 @@ class OrderRepo implements OrderInterface
             //$xml->customer->date_upd = '2022-09-28 19:33:22';
             $xml->customer->reset_password_token = '';
             $xml->customer->reset_password_validity = '0000-00-00 00:00:00';
-            
+
             $opt = array('resource' => 'customers');
             $opt['postXml'] = $xml->asXML();
             $xml = $webService->add($opt);
@@ -144,7 +144,7 @@ class OrderRepo implements OrderInterface
             $xml->cart->id_customer = $customer['id'];
             $xml->cart->secure_key = $customer['secure_key'];
             $xml->cart->id_address_delivery = $id['address'];
-            $xml->cart->id_address_invoice =$id['address']; 
+            $xml->cart->id_address_invoice = $id['address'];
             $xml->cart->id_currency = $id['currency'];
             $xml->cart->id_lang = $id['lang'];
             $xml->cart->id_carrier = $id['carrier'];
@@ -165,7 +165,6 @@ class OrderRepo implements OrderInterface
             $opt['postXml'] = $xml->asXML();
             $xml = $webService->add($opt);
         } catch (\Exception $e) {
-            $mensaje = $e->getMessage();
             return $e->getMessage();
         }
 
@@ -175,7 +174,7 @@ class OrderRepo implements OrderInterface
         try {
             // CREATE Order
             $xml = $webService->get(array('url' => $this->url . '/api/orders?schema=blank'));
-         
+
             $xml->order->id_address_delivery = $id['address'];
             $xml->order->id_address_invoice = $id['address'];
             $xml->order->id_cart = $id['cart'];
@@ -232,6 +231,7 @@ class OrderRepo implements OrderInterface
             $opt['postXml'] = $xml->asXML();
             $xml = $webService->add($opt);
 
+            $order = $xml->order;
             $id['order'] = $xml->order->id;
             $id['secure_key'] = $xml->order->secure_key;
 
@@ -242,40 +242,37 @@ class OrderRepo implements OrderInterface
             $opt = array('resource' => 'order_histories');
             $opt['postXml'] = $xml->asXML();
             $xml = $webService->add($opt);
-            }catch (PrestaShopWebserviceException $e) {
-                // Here we are dealing with errors
-                 
-                $trace = $e->getTrace();
-                 
-                if ($trace[0]['args'][0] == 404) echo 'Bad ID';
-                 
-                else if ($trace[0]['args'][0] == 401) echo 'Bad auth key';
-                 
-                else echo 'Other error<br />'.$e->getMessage();
-                 
-            }
+        } catch (PrestaShopWebserviceException $e) {
+            return $e->getMessage();
+        }
 
-
-
-        // $full_path = $this->url . 'products?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
-        // $response = $this->http->get($full_path, [
-        //     'headers'         => $this->headers,
-        //     'timeout'         => 30,
-        //     'connect_timeout' => 30,
-        //     'http_errors'     => true,
-        // ]);
-        // return json_decode($response->getBody(), true);
+        return  $order;
     }
 
-    public function updateOrder($order)
+    public function updateOrderHistoriesState($idPedido, $idEstado)
     {
-        $full_path = $this->url . 'products?ws_key=' . config('constants.apiKey') . '&display=full&output_format=JSON';
-        $response = $this->http->get($full_path, [
-            'headers'         => $this->headers,
-            'timeout'         => 30,
-            'connect_timeout' => 30,
-            'http_errors'     => true,
-        ]);
-        return json_decode($response->getBody(), true);
+        $webService = new PrestaShopWebservice($this->url, config('constants.apiKey'), false);
+
+        try {
+            $opt = [
+                'resource' => 'order_histories?schema=blank'
+            ];
+
+            $xml = $webService->get($opt);
+            $resources = $xml->order_history->children();
+
+            $resources->id_order = intval($idPedido);
+            $resources->id_order_state = $idEstado; // pago aceptado TODO
+            $resources->id_employee = 1;
+
+            $opt = [
+                'resource' => 'order_histories',
+                'postXml' => $xml->asXML(),
+            ];
+
+            $createdXml = $webService->add($opt);
+        } catch (PrestaShopWebserviceException $e) {
+            return $e->getMessage();
+        }
     }
 }

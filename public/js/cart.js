@@ -1,15 +1,15 @@
 $(document).ready(function () {
 
     $(".add-cart").click(function (e) {
+        e.preventDefault();
         $(".spinner-add-cart").show();
         var productId = $(this).data("productid");
         $.ajax({
             url: '/mofront/public/cart/add/' + productId,
             type: 'get',
+            dataType: 'html',
             success: function (response) {
-                console.log(response);
-                $("#header-cart").empty();
-                $("#header-cart").append(response)
+                $("#header-cart").html(response)
                 $(".spinner-add-cart").hide();
             },
             statusCode: {
@@ -31,7 +31,9 @@ $(document).ready(function () {
             $.ajax({
                 url: '/mofront/public/cart/delete/' + productId,
                 type: 'get',
+                dataType: "json",
                 success: function (data) {
+                    console.log(data);
                     $("#grid-cart").empty();
                     $("#grid-cart").append(data.htmlGrid);
 
